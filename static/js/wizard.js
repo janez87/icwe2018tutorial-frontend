@@ -3,10 +3,22 @@ var jsonData = {
 }
 $(document).ready(function () {
 
+    function saveInfo(){
+        console.log("general info")
+        var name = $("#appName").val()
+        var description = $("#appDescription").val()
+
+        if (name && description) {
+            jsonData.application = {
+                name: name,
+                description: description
+            }
+        }
+    }
     function saveStreams(data){
         
         var streams = []
-        console.log("register")
+        console.log("register streams")
         $(".stream").each(function (k, v) { 
            var name = $(v).find("#streamName1").val()             
            var uri =  $(v).find("#streamUri1").val()   
@@ -25,18 +37,60 @@ $(document).ready(function () {
 
 
     function saveEngine(data) {
-        console.log(data)
+        console.log("register engine")
+        var name = $("#engine #engineName").val()
+        var uri = $("#engine #engineUri").val()
+
+        if(name && uri){
+            jsonData.engine = {
+                name:name,
+                uri:uri
+            }
+        }
+
     }
 
     function saveQueries(data) {
-        console.log(data)
+        var queries = []
+        console.log("register query")
+        $(".query").each(function (k, v) {
+            var name = $(v).find("#queryName1").val()
+            var body = $(v).find("#queryBody1").val()
+
+            console.log(body)
+            if (name && body) {
+                queries.push({
+                    name: name,
+                    body: body
+                })
+            }
+        })
+
+        jsonData.queries = queries
+        createObserverForm()
     }
 
+    function createObserverForm(){
+        var queries = jsonData.queries
+        var $container = $(".observers")
+        for (let i = 0; i < queries.length; i++) {
+            var $clone = $("#observer0").clone()
+            const query = queries[i];
+            
+            $clone.attr("id","observer"+(i+1))
+
+            console.log($clone)
+            $clone.find("#obsQuery").val(query.name)
+            $clone.appendTo($container)
+        }
+
+        $("#observer0").remove()
+    }
     function saveObservers(data) {
         console.log(data)
     }
 
-    var handlers = [saveStreams, saveEngine, saveQueries, saveObservers]
+    var handlers = [saveInfo,saveStreams, saveEngine, saveQueries, saveObservers]
     // Step show event
     $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
         //alert("You are on step "+stepNumber+" now");
@@ -62,6 +116,17 @@ $(document).ready(function () {
         var count = $(".stream").length+1
 
         $clone.attr("id","stream"+count)
+
+        $clone.appendTo($container)
+    })
+
+    var btnAddQuery = $("#addQuery").on('click', function () {
+        var $container = $("#queries")
+
+        var $clone = $("#query1").clone()
+        var count = $(".query").length + 1
+
+        $clone.attr("id", "query" + count)
 
         $clone.appendTo($container)
     })
