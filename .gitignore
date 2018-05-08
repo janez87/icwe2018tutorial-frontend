@@ -1,0 +1,5 @@
+.icwe2018/
+.DS_Store
+__pycache__/
+
+configuration/configuration.py
