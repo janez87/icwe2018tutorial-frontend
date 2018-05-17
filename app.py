@@ -23,13 +23,51 @@ db = client[configuration.DB_NAME]
 # Views rendering
 @app.route('/')
 def index():
-    return render_template('index.html', title='ICWE2018')
 
-@app.route('/wizard')
-def wizard():
-    return render_template('wizard.html', title='ICWE2018')
+    applications = list(db["application"].find())
+    print(applications)
+    return render_template('index.html', title='ICWE2018',applications=applications)
+
+@app.route('/wizard-app')
+def wizard_app():
+    return render_template('wizard-app.html', title='ICWE2018')
 
 
+@app.route('/wizard-obs')
+def wizard_obs():
+    return render_template('wizard-obs.html', title='ICWE2018')
+
+
+@app.route('/wizard-stream')
+def wizard_stream():
+    return render_template('wizard-stream.html', title='ICWE2018')
+
+
+@app.route('/add-app', methods=['POST'])
+def add_app():
+    print(request.get_json())
+
+    db["application"].save(request.get_json())
+
+    return jsonify({"status":"ok"})
+
+
+@app.route('/add-stream', methods=['POST'])
+def add_stream():
+    print(request.get_json())
+
+    db["stream"].save(request.get_json())
+
+    return jsonify({"status": "ok"})
+
+
+@app.route('/add-observer', methods=['POST'])
+def add_obs():
+    print(request.get_json())
+
+    db["stream"].save(request.get_json())
+
+    return jsonify({"status": "ok"})
 
 if __name__ == '__main__':
     #app.run(debug=True)

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ICWE2018 Tutorial - Engineering of Web Stream Processing Applications</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/wizard.css" rel="stylesheet">
+    <link href="static/css/sidebar.css" rel="stylesheet">
+    <link href="static/css/jsonld-viz.css" rel="stylesheet">
+    
+
+</head>
+
+<body>
+
+   <!-- <header>
+       
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">ICWE2018 Tutorial</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>-->
+
+    <!-- Begin page content -->
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"> <a>ICWE2018 Tutorial</a></li>
+                <li><a href="#">Create Application</a></li>
+                <li>
+                    <a href="#">Add Stream</a>
+                </li>
+                <li>
+                    <a href="#">Add Observers</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-wrapper">
+            <div class="container">
+                <!-- External toolbar sample -->
+                <div class="row d-flex align-items-center p-3 my-3 text-white-50">
+                    <div class="col-12 col-lg-6 col-sm-12">
+                        <label>External Buttons:</label>
+                        <div class="btn-group col-lg-6 col-sm-12" role="group">
+                            <button class="btn btn-secondary" id="prev-btn" type="button">Go Previous</button>
+                            <button class="btn btn-secondary" id="next-btn" type="button">Go Next</button>
+                            <button class="btn btn-danger" id="reset-btn" type="button">Reset Wizard</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- SmartWizard html -->
+                <div id="smartwizard">
+                    <ul>
+                        <li>
+                            <a href="#step-0">Step 1
+                                <br />
+                                <small>Stream Information</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-1">Step 2
+                                <br />
+                                <small>SGraph</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-2">Step 3
+                                <br />
+                                <small>Mapping</small>
+                            </a>
+                        </li>
+                    </ul>
+            
+                    <div>
+                        <div id="step-0" class="">
+                            <h3 class="border-bottom border-gray pb-2">Stream Information</h3>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row border-bottom border-gray pb-2 info" id="info">
+                                            <div class="col-md-10">
+                                                <label for="stream">Stream Name</label>
+                                                <input type="text" placeholder="Stream Name" class="form-control" id="name" />
+                                                <label for="websoket">Websocket Url</label>
+                                                <input type="text" placeholder="Websocket" class="form-control" id="websocket" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div>
+                        <div id="step-1" class="">
+                            <h3 class="border-bottom border-gray pb-2">SGraph </h3>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12" id="streams">
+                                        <div class="row border-bottom border-gray pb-2 stream" id="stream1">
+                                            <div class="col-md-10">
+                                                <label for="sgraphtext">SGraph</label>
+                                                <textarea class="form-control" id="sgraphtext"></textarea>
+                                                <button type="button" id="loadSgraph" class="btn btn-success">Load</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="sgraph-preview" class="row">
+                                
+                                </div>
+                            </div>
+            
+                        </div>
+                        <div id="step-2" class="">
+                            <h3 class="border-bottom border-gray pb-2">Mapping</h3>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row border-bottom border-gray pb-2 engine" id="prefix">
+                                            <div class="col-md-10">
+                                                <label for="sgraphtext">Prefix Declaration</label>
+                                                <textarea class="form-control" id="sgraphtext"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row border-bottom border-gray pb-2 engine" id="mappingDeclaration">
+                                            <div class="col-md-10">
+                                                <label for="sgraphtext">Mapping Declaration</label>
+                                                <textarea class="form-control" id="sgraphtext"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="static/js/jquery.smartWizard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.min.js"></script>
+
+    <script src="static/js/jsonld-viz.js"></script>
+    <script src="static/js/wizard-stream.js"></script>
+
+</body>
+
+</html>

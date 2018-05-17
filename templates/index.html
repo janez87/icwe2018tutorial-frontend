@@ -15,40 +15,70 @@
 
 
     <!-- Custom styles for this template -->
+    <link href="static/css/sidebar.css" rel="stylesheet">
     <link href="static/css/index.css" rel="stylesheet">
 </head>
 
 <body>
 
-    <header>
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">ICWE2018 Tutorial</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a>ICWE2018 Tutorial</a>
+                </li>
+                <li>
+                    <a href="wizard-app">Create Application</a>
+                </li>
+                <li>
+                    <a href="wizard-stream">Add Stream</a>
+                </li>
+                <li>
+                    <a href="wizard-obs">Add Observers</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div id="page-wrapper">
+            <div role="main" class="container">
+                <h1 class="mt-7">Engineering of Web Stream Processing Applications</h1>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="lead">blablablabla</p>
+                    </div>
+                </div>
+                
+                <div class="row">
 
-    <!-- Begin page content -->
-    <main role="main" class="container">
-            <h1 class="mt-7">Engineering of Web Stream Processing Applications</h1>
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="lead">blablablabla</p>
+                    <div class="col-md-4">
+                        <h1>Applications</h1>
+                        {%for app in applications%}
+                        <div class="application row">
+                            <p class="lead">{{app.application.name}}</p>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    <div class="col-md-4">
+                        <h1>Streams | Queries</h1>
+                        {%for app in applications%}
+                        <div class="application row">
+                            <p class="lead">{{app.application.name}}</p>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    <div class="col-md-4">
+                        <h1>Observers</h1>
+                        {%for app in applications%}
+                        <div class="application row">
+                            <p class="lead">{{app.application.name}}</p>
+                        </div>
+                        {%endfor%}
+                    </div>
                 </div>
             </div>
-    </main>
+        </div>
+    </div>
+    
 
     <footer class="footer">
         <div class="container">
