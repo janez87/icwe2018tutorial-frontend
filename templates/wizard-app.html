@@ -54,7 +54,7 @@
                     <a href="wizard-app">Create Application</a>
                 </li>
                 <li>
-                    <a href="add-engine">Add Engine</a>
+                    <a href="add-engine-page">Add Engine</a>
                 </li>
                 <li>
                     <a href="wizard-stream">Add Stream</a>
@@ -121,8 +121,19 @@
             
                         </div>
                         <div id="step-2" class="">
-                            <h3 class="border-bottom border-gray pb-2">Add Engine</h3>
+                            <h3>Add Engine</h3>
+                            <h4 class="border-bottom border-gray pb-2"> Either add a new one or select one from the list</h4>
                             <div class="form-group">
+                                <div class="row border-bottom border-gray pb-2">
+                                    <div class="col-md-6">
+                                        <label>Engine</label>
+                                        <select id="selectedEngine" class="form-control">
+                                            {% for e in engines %}
+                                                <option value="{{e.engine.name}}">{{e.engine.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="row border-bottom border-gray pb-2 engine" id="engine">
@@ -179,15 +190,14 @@
                                     <div class="col-md-8" id="queries">
                                         <div class="row border-bottom border-gray pb-2 query" id="query1">
                                             <div class="col-md-10">
-                                                <label for="queryName1">Query Name</label>
-                                                <input type="text" placeholder="Query name" class="form-control" id="queryName1" />
-                                                <label for="queryBody">Query Body</label>
+                                                <code>REGISTER STREAM AS </code><input type="text" placeholder="Query name" class="" id="queryName1" />
+                
                                                 <textarea class="form-control" id="queryBody"></textarea>
                                             </div>
             
                                         </div>
                                     </div>
-                                    <div class="text-right col-md-6">
+                                    <div class="text-right col-md-6 queryBody">
                                         <button type="button" id="addQuery" class="btn btn-success">Add an additional query</button>
                                     </div>
                                 </div>

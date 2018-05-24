@@ -2,6 +2,8 @@ var jsonData = {
 
 }
 
+var queryContainers = []
+
 $(document).ready(function () {
 
     function saveInfo(){
@@ -47,9 +49,18 @@ $(document).ready(function () {
                 name:name,
                 uri:uri
             }
+        }else{
+            jsonData.engine = {
+                existing:$("#selectedEngine option:selected").val()
+            }
         }
-
+        
         var yasqe = YASQE.fromTextArea($("#queryBody")[0]);
+
+        queryContainers.push({
+            name:$("#queryName1").val(),
+            body:yasqe
+        })
 
 
     }
@@ -59,8 +70,9 @@ $(document).ready(function () {
         console.log("register query")
         $(".query").each(function (k, v) {
             var name = $(v).find("#queryName1").val()
-            var body = $(v).find("#queryBody1").val()
+            var body = queryContainers[k].body.getValue()
 
+            console.log(name)
             console.log(body)
             if (name && body) {
                 queries.push({
@@ -71,7 +83,6 @@ $(document).ready(function () {
         })
 
         jsonData.queries = queries
-        createObserverForm()
     }
 
     function createObserverForm(){
@@ -132,22 +143,18 @@ $(document).ready(function () {
 
         $clone.attr("id", "query" + count)
 
+        $clone.find(".yasqe").remove()
+        $clone.find(".col-md-10").append($('<textarea class="form-control" id="queryBody" style="display: none;"></textarea>'))
         $clone.appendTo($container)
-    })
+        var yasqe = YASQE.fromTextArea($clone.find("#queryBody")[0]);
 
-    var insertEngine =  $("#insertEngine").on('click',function(){
-
-        var payload = {
-            method: "POST",
-            data: JSON.stringify(jsonData),
-            contentType: 'application/json',
-            url: "add-engine"
-        }
-        $.ajax(payload)
-            .done(function (data) { console.log(data) })
-            .fail(function (error) { console.log(error) })
+        queryContainers.push({
+            body: yasqe
+        })
 
     })
+
+    
     var loadEngine = $("#loadEngine").on('click', function () {
         var $container = $("#engine-preview")
         $.get('static/csparql.json')
@@ -239,6 +246,8 @@ $(document).ready(function () {
                 contentType: 'application/json',
                 url:"add-app"
             }
+
+            console.log("done")
             $.ajax(payload)
             .done(function(data){console.log(data)})
             .fail(function(error){console.log(error)})

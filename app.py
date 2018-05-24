@@ -24,17 +24,18 @@ db = client[configuration.DB_NAME]
 @app.route('/')
 def index():
     applications = list(db["application"].find())
-    print(applications)
     return render_template('index.html', title='ICWE2018',applications=applications)
 
 
-@app.route('/add-engine')
+@app.route('/add-engine-page')
 def add_engine_page():
         return render_template('add-engine.html', title='ICWE2018')
 
 @app.route('/wizard-app')
 def wizard_app():
-    return render_template('wizard-app.html', title='ICWE2018')
+    engines = list(db["engine"].find(projection={"_id": 0}))
+
+    return render_template('wizard-app.html', title='ICWE2018', engines=engines)
 
 
 @app.route('/wizard-obs')
@@ -63,6 +64,12 @@ def add_engine():
 
     return jsonify({"status": "ok"})
 
+
+@app.route('/get-engines', methods=['GET'])
+def get_engines():
+    engines = list(db["engine"].find(projection={"_id":0}))
+
+    return jsonify(engines)
 
 @app.route('/add-stream', methods=['POST'])
 def add_stream():
