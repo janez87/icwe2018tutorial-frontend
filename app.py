@@ -23,10 +23,14 @@ db = client[configuration.DB_NAME]
 # Views rendering
 @app.route('/')
 def index():
-
     applications = list(db["application"].find())
     print(applications)
     return render_template('index.html', title='ICWE2018',applications=applications)
+
+
+@app.route('/add-engine')
+def add_engine_page():
+        return render_template('add-engine.html', title='ICWE2018')
 
 @app.route('/wizard-app')
 def wizard_app():
@@ -50,6 +54,14 @@ def add_app():
     db["application"].save(request.get_json())
 
     return jsonify({"status":"ok"})
+
+@app.route('/add-engine', methods=['POST'])
+def add_engine():
+    print(request.get_json())
+
+    db["engine"].save(request.get_json())
+
+    return jsonify({"status": "ok"})
 
 
 @app.route('/add-stream', methods=['POST'])

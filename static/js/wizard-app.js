@@ -49,6 +49,9 @@ $(document).ready(function () {
             }
         }
 
+        var yasqe = YASQE.fromTextArea($("#queryBody")[0]);
+
+
     }
 
     function saveQueries(data) {
@@ -132,6 +135,19 @@ $(document).ready(function () {
         $clone.appendTo($container)
     })
 
+    var insertEngine =  $("#insertEngine").on('click',function(){
+
+        var payload = {
+            method: "POST",
+            data: JSON.stringify(jsonData),
+            contentType: 'application/json',
+            url: "add-engine"
+        }
+        $.ajax(payload)
+            .done(function (data) { console.log(data) })
+            .fail(function (error) { console.log(error) })
+
+    })
     var loadEngine = $("#loadEngine").on('click', function () {
         var $container = $("#engine-preview")
         $.get('static/csparql.json')
