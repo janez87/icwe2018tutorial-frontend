@@ -24,7 +24,8 @@ db = client[configuration.DB_NAME]
 @app.route('/')
 def index():
     applications = list(db["application"].find())
-    return render_template('index.html', title='ICWE2018',applications=applications)
+    engines = list(db["engine"].find())
+    return render_template('index.html', title='ICWE2018',applications=applications,engines=engines)
 
 
 @app.route('/add-engine-page')
